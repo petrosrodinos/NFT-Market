@@ -32,10 +32,6 @@ const LinkItems = [
   { name: "/", icon: FiHome },
   { name: "create", icon: FiPlusCircle },
   { name: "profile", icon: CgProfile },
-  { name: "", icon: FiTrendingUp },
-  { name: "", icon: FiCompass },
-  { name: "", icon: FiStar },
-  { name: "", icon: FiSettings },
 ];
 
 const AuthIcons = [BsPerson, FiPower];
@@ -44,10 +40,7 @@ export default function SimpleSidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh">
-      <SidebarContent
-        onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
-      />
+      <SidebarContent onClose={() => onClose} display={{ base: "none", md: "block" }} />
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
@@ -82,13 +75,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}
     >
-      <Flex
-        h="20"
-        alignItems="center"
-        mx="4"
-        textAlign="center"
-        justifyContent="space-between"
-      >
+      <Flex h="20" alignItems="center" mx="4" textAlign="center" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           NFT Market
         </Text>
@@ -130,24 +117,6 @@ const AuthItem = ({ icon, children, tooltip, loginPress }) => {
         color: "white",
       }}
     >
-      {icon && (
-        <Tooltip
-          placement="auto-start"
-          hasArrow
-          label={tooltip}
-          aria-label="A tooltip"
-        >
-          <Icon
-            color="#38B2AC"
-            mr="4"
-            fontSize="30"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        </Tooltip>
-      )}
       {children}
     </Button>
   );
@@ -169,22 +138,15 @@ const NavItem = ({ icon, children, tooltip }) => {
         }}
       >
         {icon && (
-          <Tooltip
-            placement="auto-start"
-            hasArrow
-            label={tooltip}
-            aria-label="A tooltip"
-          >
-            <Icon
-              color="#38B2AC"
-              mr="4"
-              fontSize="30"
-              _groupHover={{
-                color: "white",
-              }}
-              as={icon}
-            />
-          </Tooltip>
+          <Icon
+            color="#38B2AC"
+            mr="4"
+            fontSize="30"
+            _groupHover={{
+              color: "white",
+            }}
+            as={icon}
+          />
         )}
       </Flex>
     </Link>
@@ -204,12 +166,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       justifyContent="flex-start"
       {...rest}
     >
-      <IconButton
-        variant="outline"
-        onClick={onOpen}
-        aria-label="open menu"
-        icon={<FiMenu />}
-      />
+      <IconButton variant="outline" onClick={onOpen} aria-label="open menu" icon={<FiMenu />} />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
         NFT Market
