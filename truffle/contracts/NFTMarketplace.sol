@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.1;
+pragma solidity ^0.8.22;
 
-import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 
 contract NFTMarketplace is ERC721URIStorage {
-    using Counters for Counters.Counter;
-    Counters.Counter private _tokenIds;
-    Counters.Counter private _itemsSold;
+    uint256 private _tokenIds;
+    uint256 private _itemsSold;
 
     uint256 listingPrice = 0.025 ether;
     address payable owner;
@@ -49,8 +47,8 @@ contract NFTMarketplace is ERC721URIStorage {
 
     /* Mints a token and lists it in the marketplace */
     function createToken(string memory tokenURI, uint256 price) public payable returns (uint) {
-      _tokenIds.increment();
-      uint256 newTokenId = _tokenIds.current();
+      _tokenIds++;
+      uint256 newTokenId = _tokenIds;
 
       _mint(msg.sender, newTokenId);
       _setTokenURI(newTokenId, tokenURI);
@@ -91,7 +89,7 @@ contract NFTMarketplace is ERC721URIStorage {
       idToMarketItem[tokenId].price = price;
       idToMarketItem[tokenId].seller = payable(msg.sender);
       idToMarketItem[tokenId].owner = payable(address(this));
-      _itemsSold.decrement();
+      _itemsSold--;
 
       _transfer(msg.sender, address(this), tokenId);
     }
@@ -107,7 +105,7 @@ contract NFTMarketplace is ERC721URIStorage {
       idToMarketItem[tokenId].owner = payable(msg.sender);
       idToMarketItem[tokenId].sold = true;
       idToMarketItem[tokenId].seller = payable(address(0));
-      _itemsSold.increment();
+      _itemsSold++;
       _transfer(address(this), msg.sender, tokenId);
       payable(owner).transfer(listingPrice);
       payable(seller).transfer(msg.value);
@@ -115,8 +113,8 @@ contract NFTMarketplace is ERC721URIStorage {
 
     /* Returns all unsold market items */
     function fetchMarketItems() public view returns (MarketItem[] memory) {
-      uint itemCount = _tokenIds.current();
-      uint unsoldItemCount = _tokenIds.current() - _itemsSold.current();
+      uint itemCount = _tokenIds;
+      uint unsoldItemCount = _tokenIds - _itemsSold;
       uint currentIndex = 0;
 
       MarketItem[] memory items = new MarketItem[](unsoldItemCount);
@@ -133,7 +131,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
     /* Returns only items that a user has purchased */
     function fetchMyNFTs() public view returns (MarketItem[] memory) {
-      uint totalItemCount = _tokenIds.current();
+      uint totalItemCount = _tokenIds;
       uint itemCount = 0;
       uint currentIndex = 0;
 
@@ -157,7 +155,7 @@ contract NFTMarketplace is ERC721URIStorage {
 
     /* Returns only items a user has listed */
     function fetchItemsListed() public view returns (MarketItem[] memory) {
-      uint totalItemCount = _tokenIds.current();
+      uint totalItemCount = _tokenIds;
       uint itemCount = 0;
       uint currentIndex = 0;
 

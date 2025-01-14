@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NftList from "../components/NftList";
-import {
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
-  Tab,
-  Spinner,
-  Center,
-} from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, TabPanel, Tab, Spinner, Center } from "@chakra-ui/react";
 import { useNft } from "../hooks/nft-hook";
 import { color } from "../style/colors";
 
@@ -42,25 +34,17 @@ const Profile = () => {
   };
 
   return (
-    <Tabs variant="soft-rounded" colorScheme="green" isFitted>
+    <Tabs w="100%" variant="soft-rounded" colorScheme="green" isFitted ml="5">
       <TabList mb="1em">
         <Tab>Collection</Tab>
         <Tab>Minted NFTs</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
-          {loading ? (
-            <CenterSpinner />
-          ) : (
-            <NftList path={"profile"} nftList={bought} />
-          )}
+          {loading ? <CenterSpinner /> : <NftList path={"profile"} nftList={bought} />}
         </TabPanel>
         <TabPanel>
-          {loading ? (
-            <CenterSpinner />
-          ) : (
-            <NftList minted path={"profile"} nftList={listed} />
-          )}
+          {loading ? <CenterSpinner /> : <NftList minted path={"profile"} nftList={listed} />}
         </TabPanel>
       </TabPanels>
     </Tabs>

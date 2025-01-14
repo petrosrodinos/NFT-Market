@@ -18,13 +18,11 @@ const Main = () => {
   }, []);
 
   return (
-    <AuthContext.Provider
-      value={{ web3, accounts, contract, Login, Logout, logedIn: !!accounts }}
-    >
+    <AuthContext.Provider value={{ web3, accounts, contract, Login, Logout, logedIn: !!accounts }}>
       <Container maxW="container.xl">
         <BrowserRouter>
           <AppBar>
-            <Notice isOpen={isOpen} onClose={onClose} />
+            {/* <Notice isOpen={isOpen} onClose={onClose} /> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="create" element={<CreateNft />} />

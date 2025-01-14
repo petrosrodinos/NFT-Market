@@ -9,20 +9,10 @@ import {
   Drawer,
   DrawerContent,
   Text,
-  Tooltip,
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
-import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
-  FiMenu,
-  FiPower,
-  FiPlusCircle,
-} from "react-icons/fi";
+import { FiHome, FiMenu, FiPower, FiPlusCircle } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { BsPerson } from "react-icons/bs";
 import { AuthContext } from "../context/auth-context";
@@ -32,10 +22,6 @@ const LinkItems = [
   { name: "/", icon: FiHome },
   { name: "create", icon: FiPlusCircle },
   { name: "profile", icon: CgProfile },
-  { name: "", icon: FiTrendingUp },
-  { name: "", icon: FiCompass },
-  { name: "", icon: FiStar },
-  { name: "", icon: FiSettings },
 ];
 
 const AuthIcons = [BsPerson, FiPower];
@@ -44,10 +30,7 @@ export default function SimpleSidebar({ children }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box minH="100vh">
-      <SidebarContent
-        onClose={() => onClose}
-        display={{ base: "none", md: "block" }}
-      />
+      <SidebarContent onClose={() => onClose} display={{ base: "none", md: "block" }} />
       <Drawer
         autoFocus={false}
         isOpen={isOpen}
@@ -61,9 +44,17 @@ export default function SimpleSidebar({ children }) {
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
-      {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-      <Box p={3} ml={20} w="100%">
+      <Box
+        p={3}
+        ml={20}
+        w={
+          {
+            // md: "100%",
+            // sm: "100%",
+          }
+        }
+      >
         {children}
       </Box>
     </Box>
@@ -82,13 +73,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}
     >
-      <Flex
-        h="20"
-        alignItems="center"
-        mx="4"
-        textAlign="center"
-        justifyContent="space-between"
-      >
+      <Flex h="20" alignItems="center" mx="4" textAlign="center" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
           NFT Market
         </Text>
@@ -116,13 +101,12 @@ const SidebarContent = ({ onClose, ...rest }) => {
   );
 };
 
-const AuthItem = ({ icon, children, tooltip, loginPress }) => {
+const AuthItem = ({ icon, children, loginPress }) => {
   return (
     <Button
       onClick={loginPress}
       variant="link"
       p="6"
-      mx="4"
       borderRadius="lg"
       role="group"
       _hover={{
@@ -131,22 +115,15 @@ const AuthItem = ({ icon, children, tooltip, loginPress }) => {
       }}
     >
       {icon && (
-        <Tooltip
-          placement="auto-start"
-          hasArrow
-          label={tooltip}
-          aria-label="A tooltip"
-        >
-          <Icon
-            color="#38B2AC"
-            mr="4"
-            fontSize="30"
-            _groupHover={{
-              color: "white",
-            }}
-            as={icon}
-          />
-        </Tooltip>
+        <Icon
+          color="#38B2AC"
+          mr="4"
+          fontSize="30"
+          _groupHover={{
+            color: "white",
+          }}
+          as={icon}
+        />
       )}
       {children}
     </Button>
@@ -159,7 +136,6 @@ const NavItem = ({ icon, children, tooltip }) => {
       <Flex
         align="center"
         p="6"
-        mx="4"
         borderRadius="lg"
         role="group"
         cursor="pointer"
@@ -169,22 +145,15 @@ const NavItem = ({ icon, children, tooltip }) => {
         }}
       >
         {icon && (
-          <Tooltip
-            placement="auto-start"
-            hasArrow
-            label={tooltip}
-            aria-label="A tooltip"
-          >
-            <Icon
-              color="#38B2AC"
-              mr="4"
-              fontSize="30"
-              _groupHover={{
-                color: "white",
-              }}
-              as={icon}
-            />
-          </Tooltip>
+          <Icon
+            color="#38B2AC"
+            mr="4"
+            fontSize="30"
+            _groupHover={{
+              color: "white",
+            }}
+            as={icon}
+          />
         )}
       </Flex>
     </Link>
@@ -204,12 +173,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       justifyContent="flex-start"
       {...rest}
     >
-      <IconButton
-        variant="outline"
-        onClick={onOpen}
-        aria-label="open menu"
-        icon={<FiMenu />}
-      />
+      <IconButton variant="outline" onClick={onOpen} aria-label="open menu" icon={<FiMenu />} />
 
       <Text fontSize="2xl" ml="8" fontFamily="monospace" fontWeight="bold">
         NFT Market
