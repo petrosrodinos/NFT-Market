@@ -59,13 +59,7 @@ export default function Card({ nft, confirm, preview, path, minted }) {
             },
           }}
         >
-          <Image
-            rounded={"lg"}
-            height={260}
-            width={282}
-            objectFit={"cover"}
-            src={nft.image}
-          />
+          <Image rounded={"lg"} height={260} width={282} objectFit={"cover"} src={nft.image} />
         </Box>
         <Stack pt={10} align={"center"}>
           <Text color={color} fontSize={"sm"} textTransform={"uppercase"}>
@@ -101,12 +95,8 @@ export default function Card({ nft, confirm, preview, path, minted }) {
             </Stack>
           )}
           {preview && (
-            <Button
-              rightIcon={<FiHome />}
-              colorScheme={"teal"}
-              variant="outline"
-            >
-              TAKE ME HOME
+            <Button rightIcon={<FiHome />} colorScheme={"teal"} variant="outline">
+              BUY
             </Button>
           )}
           {path === "home" && (
@@ -120,12 +110,7 @@ export default function Card({ nft, confirm, preview, path, minted }) {
             </Button>
           )}
           {path === "profile" && !minted && (
-            <Button
-              rightIcon={<FiHome />}
-              colorScheme={"teal"}
-              variant="outline"
-              onClick={onOpen}
-            >
+            <Button rightIcon={<FiHome />} colorScheme={"teal"} variant="outline" onClick={onOpen}>
               SELL ME
             </Button>
           )}
@@ -146,15 +131,9 @@ export default function Card({ nft, confirm, preview, path, minted }) {
       </Box>
       <ConfirmBuy isOpen={isOpen} onClose={onClose} onOpen={onOpen}>
         {path === "home" && (
-          <Card
-            style={{ display: "flex", flexWrap: "wrap" }}
-            confirm
-            nft={nft}
-          />
+          <Card style={{ display: "flex", flexWrap: "wrap" }} confirm nft={nft} />
         )}
-        {path === "profile" && !minted && (
-          <ListToMarket id={nft.tokenId} owner={nft.owner} />
-        )}
+        {path === "profile" && !minted && <ListToMarket id={nft.tokenId} owner={nft.owner} />}
       </ConfirmBuy>
     </Center>
   );

@@ -16,6 +16,7 @@ export const useAuth = () => {
       const accounts = await web3.eth.getAccounts();
 
       const networkId = await web3.eth.net.getId();
+      console.log("networkId: ", networkId);
       const deployedNetwork = NFTMarketplaceContract.networks[networkId];
       const instance = new web3.eth.Contract(
         NFTMarketplaceContract.abi,

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { SimpleGrid, Alert, Container } from "@chakra-ui/react";
 import Card from "./Card";
-import Filters from "./Filters";
 import { FiAlertCircle } from "react-icons/fi";
 import { color } from "../style/colors";
 
@@ -16,7 +15,6 @@ const NftList = ({ nftList, path, minted }) => {
 
   return (
     <>
-      <Filters />
       {!list && (
         <Container style={{ padding: 20 }}>
           <Alert status="warning">
